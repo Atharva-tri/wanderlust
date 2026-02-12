@@ -1,0 +1,152 @@
+ <% layout('/layouts/boilerplate.ejs') -%>
+ <%=success%>
+ <style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filters {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+    text-decoration: none;
+    color: inherit;
+  }
+  .filters:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  .filters p {
+    font-size: 0.8rem;
+  }
+  .tax-info {
+    display: none;
+  }
+  .tax-toggle {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    height: 3.25rem;
+    padding: 1rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    
+  }
+  .tax-toggle:hover {
+    border-color: rgba(0,0,0,0.8);
+    cursor: pointer;
+  }
+ </style>
+  <div id="filters">
+    <a href="/listings?category=Trending" class="filters"> 
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </a>
+    <a href="/listings?category=Rooms" class="filters"> 
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </a>
+    <a href="/listings?category=Iconic Cities" class="filters"> 
+      <div><i class="fa-solid fa-city"></i></div>
+      <p>Iconic Cities</p>
+    </a>
+    <a href="/listings?category=Mountains" class="filters"> 
+      <div><i class="fa-solid fa-mountain"></i></div>
+      <p>Mountains</p>
+    </a>
+    <a href="/listings?category=Castles" class="filters"> 
+      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <p>Castles</p>
+    </a>
+    <a href="/listings?category=Amazing Pools" class="filters"> 
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Amazing Pools</p>
+    </a>
+    <a href="/listings?category=Camping" class="filters"> 
+      <div><i class="fa-solid fa-campground"></i></div>
+      <p>Camping</p>
+    </a>
+    <a href="/listings?category=Farms" class="filters"> 
+      <div><i class="fa-solid fa-cow"></i></div>
+      <p>Farms</p>
+    </a>
+    <a href="/listings?category=Arctic" class="filters"> 
+      <div><i class="fa-solid fa-snowflake"></i></div>
+      <p>Arctic</p>
+    </a>
+    <a href="/listings?category=Domes" class="filters"> 
+      <div><i class="fa-solid fa-igloo"></i></div>
+      <p>Domes</p>
+    </a>
+    <a href="/listings?category=Boats" class="filters"> 
+      <div><i class="fa-solid fa-ship"></i></div>
+      <p>Boats</p>
+    </a>
+
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click", () => {
+      let taxInfo = document.getElementsByClassName("tax-info");
+      for (info of taxInfo) {
+        if (info.style.display != "inline") {
+          info.style.display = "inline";
+        } else {
+          info.style.display = "none";
+        }
+      }
+    });
+  </script>
+ 
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+
+    <% if (Array.isArray(allListings) && allListings.length) { %>
+
+      <% allListings.forEach(function(listing) { %>
+
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+          <div class="card col listing-card">
+            <img src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60' %>" 
+                 class="card-img-top" 
+                 alt="Listing_image" 
+                 style="height: 20rem; object-fit: cover;">
+            
+            <div class="card-body">
+              <p class="card-text">
+                <b><%= listing.title || 'Untitled' %></b><br>
+                <% if (listing.price != null && !isNaN(Number(listing.price))) { %>
+                  &#8377; <%= Number(listing.price).toLocaleString("en-IN") %> / night
+                  <i class="tax-info">&nbsp; &nbsp;+18% GST</i>
+                <% } else { %>
+                  Price not available
+                <% } %>
+              </p>
+            </div>
+          </div>
+        </a>
+
+      <% }) %>
+
+    <% } else { %>
+      <div class="col-12 text-center mt-5">
+        <div class="no-results">
+          <i class="fa-solid fa-magnifying-glass fa-3x mb-3 text-muted"></i>
+          <h3>No listings found</h3>
+          <p class="text-muted">Try adjusting your search or filters to find what you're looking for.</p>
+          <a href="/listings" class="btn btn-outline-dark mt-2">View all listings</a>
+        </div>
+      </div>
+    <% } %>
+
+  </div>
+ 
