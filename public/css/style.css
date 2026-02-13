@@ -166,3 +166,114 @@ body {
   width: 100%;
   border-radius: 1rem;
 }
+
+@media (max-width: 480px) {
+
+  body {
+    font-size: 0.9rem;
+  }
+
+  .fa-compass {
+    font-size: 1.5rem;
+  }
+
+  .card-img-top {
+    height: 180px;
+  }
+
+  .show-img {
+    height: 20vh;
+  }
+
+  #map {
+    height: 250px;
+  }
+
+}
+@media (max-width: 992px) {
+
+  /* Show card padding */
+  .show-card {
+    padding: 1rem !important;
+  }
+
+  /* Show image */
+  .show-img {
+    width: 100%;
+    height: 28vh;
+    object-fit: cover;
+  }
+
+  /* Buttons wrap */
+  .btns {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Map */
+  #map {
+    height: 350px;
+  }
+
+}
+@media (max-width: 768px) {
+
+  /* Show layout single column */
+  .row {
+    flex-direction: column;
+  }
+
+  /* Image full width */
+  .show-img {
+    width: 100%;
+    height: 25vh;
+    border-radius: 0.8rem;
+  }
+
+  /* Content spacing */
+  .show-card {
+    padding: 0.8rem !important;
+  }
+
+  /* Buttons stacked */
+  .btns {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.6rem;
+  }
+
+  .btns button,
+  .btns a {
+    width: 100%;
+  }
+
+  /* Title spacing */
+  h3, h4, h5 {
+    margin-top: 0.5rem;
+  }
+
+  /* Map */
+  #map {
+    height: 300px;
+    margin-top: 1rem;
+  }
+
+}
+@media (max-width: 480px) {
+
+  /* Image smaller */
+  .show-img {
+    height: 22vh;
+  }
+
+  /* Text slightly smaller */
+  .show-card {
+    font-size: 0.95rem;
+  }
+
+  /* Map */
+  #map {
+    height: 250px;
+  }
+
+}
