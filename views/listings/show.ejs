@@ -5,9 +5,9 @@
   const listing = <%- JSON.stringify(listing) %>;
  </script>
  <div class="row mt-3"> 
-      <div class="col-8 offset-2 "  > 
+      <div class="col-lg-8 col-12 mx-auto"  > 
     <h3><%= listing.title %></h3>
-    <div class="card col-6 offset-3 show-card listing-card">
+    <div class="card col-lg-6 col-12 mx-auto show-card listing-card">
       <img src="<%= listing.image && listing.image.url ? listing.image.url : 'https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60' %>" class="card-img-top show-img" alt="listing_image">
   <div class="card-body">
      
@@ -35,7 +35,7 @@
    <% } %>
  </div>
  <%if(currUser){%>
-  <div class="col-8 offset-3 mb-3">
+  <div class="col-lg-8 col-12 mx-auto mb-3">
     <hr/>
     <h4>Leave a Review</h4>
       <form action="/listings/<%= listing._id %>/reviews" method="POST"  novalidate class="needs-validation">
@@ -75,7 +75,7 @@
               <div class="row"></div>
                 <h4>All Reviews</h4>
               <% for(review of listing.reviews) {%>
-              <div class="card col-5 ms-3 mb-3">
+              <div class="card col-lg-5 col-md-6 col-12 mb-3">
                 <div class="card-body"> 
                  <h5 class="card-title">@<%= review.author ? review.author.username : "Anonymous" %></h5>
                        <p class="starability-result card-text" data-rating="<%= review.rating %>">  </p>
@@ -94,7 +94,7 @@
                
 
   </div>
-  <div class="col-8 offset-3 ml-3 mb-5">
+  <div class="col-lg-8 col-12 mx-auto mb-5">
     <h3>Where you'll be</h3>
     <div id="map"></div>
   </div>
